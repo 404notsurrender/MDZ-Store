@@ -179,3 +179,7 @@ vercel.json                # Vercel/TanStack Start configuration
 A platform/editor badge shown inside a Lovable editor or preview is not part of the application source itself. When this repository is deployed independently to Vercel, the Lovable editor UI is not involved.
 
 This version also removes the Lovable-specific runtime integrations from the application source.
+
+## Security update — October 2026
+
+TanStack Start 1.168.32 was affected by CVE-2026-102989 (reflected XSS in server-function responses). This standalone build pins `@tanstack/react-start` to 1.168.60 and the corresponding patched TanStack Start server-core to 1.169.39. Do not deploy the old lockfile or set `DANGEROUSLY_DEPLOY_VULNERABLE_TANSTACK_START_XSS=1` as a workaround. Reinstall dependencies from the updated `package.json` before deployment.
