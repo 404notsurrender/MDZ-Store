@@ -45,7 +45,6 @@ export async function verifyPakasirPaid(orderNumber: string, amount: number): Pr
   url.searchParams.set("project", PAKASIR_SLUG);
   url.searchParams.set("amount", String(amount));
   url.searchParams.set("order_id", orderNumber);
-  url.searchParams.set("api_key", apiKey());
   const res = await fetch(url, { headers: { "X-Api-Key": apiKey() } });
   if (!res.ok) return { paid: false, raw: null };
   const body = (await res.json().catch(() => ({}))) as AnyRecord;

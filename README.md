@@ -1,185 +1,303 @@
-# MDZ Store — Standalone Vercel + Supabase
+# CherryLuvv Market: Pasar Setan
 
-This repository is a standalone version of the uploaded store codebase.
+Build a modern e-commerce website called "CherryLuvv Market" for selling in-game items from the Roblox game "Pasar Setan".
 
-## What was changed
+IMPORTANT:
+This is NOT a generic Roblox marketplace. The website should specifically focus on selling Pasar Setan game items.
 
-- Removed Lovable-specific application dependencies and integrations.
-- Removed the Lovable project metadata from the repository.
-- Replaced Lovable OAuth helper with native Supabase OAuth.
-- Replaced Lovable preview auth storage with normal browser Supabase session storage.
-- Replaced the Lovable Vite config with standard TanStack Start + Nitro + Vite.
-- Added Vercel deployment configuration.
-- Removed the old Lovable-connected `.env`.
-- Added `.env.example`.
-- Added a standalone Supabase migration under `supabase/migrations/`.
-- Kept the existing TanStack Start / React / Supabase architecture.
+BRAND:
+- Brand name: CherryLuvv Market
+- Marketplace: Pasar Setan Roblox
+- Main tagline: "Item Pasar Setan, Cepat & Aman."
+- Visual identity: cute kawaii gaming marketplace
+- Color palette: pastel pink, lavender, white, with dark purple accents
+- Style: modern, premium, cute, clean, slightly playful
+- Use cherries, stars, hearts, subtle sparkles and gaming-related decorative elements
+- Avoid making the website look like a copy of an existing marketplace
+- Create an original visual identity for CherryLuvv Market
 
-## Requirements
+PRODUCT CATEGORIES:
 
-- Node.js 20+ (Node.js 22 is recommended)
-- A new Supabase project
-- A Vercel account
-- A Pakasir account if QRIS payments are enabled
+1. KOIN
+   - Pasar Setan Coins
+   - Product should have multiple quantity/package options
+   - Example packages:
+     - 10K Koin
+     - 25K Koin
+     - 50K Koin
+     - 100K Koin
+     - Custom Amount
 
-## 1. Create the new Supabase project
+2. SULTAN BETINA & JANTAN
+   - Sultan Betina
+   - Sultan Jantan
+   - Each should be a separate product
+   - Allow customers to select quantity
 
-Create a new project in Supabase, then copy:
+3. SERPIHAN ARWAH
+   - Spirit Shards / Serpihan Arwah
+   - Multiple quantity packages
 
-- Project URL
-- Publishable key
-- Secret/service-role key
+4. MATENGAN
+   Products:
+   - Sate Kepiting
+   - Pisang Rebus
+   - Sate Gagak
+   - Jamur Rebus
+   Each must be displayed as a separate product.
 
-Do **not** put the secret/service-role key in any `VITE_*` variable.
+5. DUPA
+   - Dupa
+   - Multiple quantity options
 
-Run the SQL migration in:
+6. KEPITING SUNGAI
+   - Kepiting Sungai
+   - Multiple quantity options
 
-`supabase/migrations/20261002000000_initial_schema.sql`
+WEBSITE STRUCTURE:
 
-You can run it from Supabase SQL Editor, or use the Supabase CLI after linking the project.
+Homepage:
+- Hero section with "CherryLuvv Market"
+- Subtitle: "Jual Item Pasar Setan Roblox"
+- CTA buttons:
+  - "Belanja Sekarang"
+  - "Lihat Semua Item"
+- Feature cards:
+  - Proses Cepat
+  - Harga Bersahabat
+  - Pelayanan Ramah
+  - Transaksi Aman
+- Featured products
+- Product categories
+- How to order section
+- Customer reviews/testimonials
+- FAQ
+- Footer
 
-### Create the first admin
+SHOP PAGE:
+Create a complete product catalog.
 
-1. Create your account through the website.
-2. In Supabase Dashboard → Authentication → Users, copy the user's UUID.
-3. Run:
+Features:
+- Search products
+- Category filter
+- Sort by price
+- Sort by popularity
+- Product cards
+- Product image
+- Product name
+- Price
+- Stock status
+- Quantity selector
+- "Tambah ke Keranjang"
+- "Beli Sekarang"
 
-```sql
-insert into public.user_roles (user_id, role)
-values ('YOUR_USER_UUID', 'admin')
-on conflict (user_id, role) do nothing;
-```
+CATEGORY FILTERS:
+- Semua
+- Koin
+- Sultan
+- Serpihan Arwah
+- Matengan
+- Dupa
+- Kepiting Sungai
 
-The existing admin route checks `has_role(auth.uid(), 'admin')`.
+PRODUCT DETAIL PAGE:
+Each product should have:
+- Product image
+- Product name
+- Description
+- Price
+- Available quantity/package
+- Stock status
+- Quantity selector
+- Add to cart
+- Buy now
+- Estimated delivery/process time
+- Important instructions
 
-## 2. Environment variables
+CART:
+Create a shopping cart system.
 
-Copy `.env.example` to `.env.local` for local development.
+Cart should display:
+- Product
+- Quantity
+- Price
+- Subtotal
+- Remove item
+- Total price
+- Checkout button
 
-Required:
+CHECKOUT:
+Create a clean checkout page.
 
-```env
-SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
-SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
-SUPABASE_SERVICE_ROLE_KEY=sb_secret_...
+Fields:
+- Roblox Username
+- Roblox Display Name
+- Discord Username (optional)
+- WhatsApp number
+- Order notes
+- Payment method
 
-VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
-VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
-```
+Before submitting the order, show:
+- Order summary
+- Product list
+- Total price
+- Customer Roblox username
+- Payment method
 
-For Pakasir:
+ORDER SYSTEM:
+After checkout, create an order number such as:
+CLM-20260927-0001
 
-```env
-PAKASIR_SLUG=pasar-setan
-PAKASIR_API_KEY=YOUR_PAKASIR_API_KEY
-```
+Show an order confirmation page with:
+- Order number
+- Payment status
+- Order status
+- Purchased items
+- Roblox username
+- Total payment
+- Instructions for the customer
 
-The Pakasir API key is server-only. Never prefix it with `VITE_`.
+ORDER STATUS:
+- Pending Payment
+- Payment Confirmed
+- Processing
+- Completed
+- Cancelled
 
-## 3. Supabase Auth
+CUSTOMER ORDER TRACKING:
+Create an "Cek Pesanan" page.
 
-For email/password authentication, enable Email provider.
+Customer enters:
+- Order ID
+- WhatsApp number or Roblox username
 
-For Google login, enable Google under:
+Then show the order status and order details.
 
-Supabase Dashboard → Authentication → Providers
+ADMIN DASHBOARD:
+Create a protected admin dashboard.
 
-Add the Vercel production URL and local URL to the Supabase Auth redirect/site URL configuration.
+Admin features:
+- Dashboard overview
+- Total orders
+- Pending orders
+- Completed orders
+- Revenue
+- Product management
+- Add product
+- Edit product
+- Delete product
+- Stock management
+- Order management
+- Update order status
+- Customer information
+- Payment status
+- Order notes
 
-Example production callback origin:
+PRODUCT DATABASE:
+Use a database structure that supports:
+- products
+- categories
+- product_variants
+- orders
+- order_items
+- customers
+- payments
+- admin_users
 
-`https://your-domain.com`
+Each product should support:
+- id
+- name
+- slug
+- category
+- description
+- image
+- price
+- stock
+- status
+- created_at
 
-The application sends Google OAuth users back to:
+SECURITY:
+Implement proper authentication and authorization.
 
-`/auth?redirect=...`
+Important:
+- Customers must NOT have access to admin functions.
+- Admin routes must be protected.
+- Never expose admin credentials in frontend code.
+- Validate all checkout inputs.
+- Sanitize user input.
+- Prevent duplicate orders.
+- Use server-side validation for important operations.
+- Do not trust price values sent by the frontend.
+- Calculate final prices on the server/database side.
+- Do not expose sensitive payment information.
 
-## 4. Local development
+RESPONSIVE DESIGN:
+The website must be fully responsive:
+- Desktop
+- Laptop
+- Tablet
+- Mobile
 
-```bash
-npm install
+Mobile navigation should use a clean hamburger menu.
+
+UI DETAILS:
+Use:
+- Rounded cards
+- Soft shadows
+- Glassmorphism used sparingly
+- Pastel pink/lavender gradients
+- Dark purple typography
+- Cherry-themed decorative elements
+- Cute but professional product illustrations
+- Smooth hover animations
+- Micro-interactions
+- Loading states
+- Empty states
+- Toast notifications
+
+IMPORTANT UX:
+The website should feel like a real Indonesian gaming marketplace, not a template.
+
+Use Indonesian language throughout the customer-facing website.
+
+Example CTA:
+"Belanja Sekarang"
+"Tambah ke Keranjang"
+"Beli Sekarang"
+"Cek Pesanan"
+"Hubungi Admin"
+
+Create realistic placeholder product data for all Pasar Setan products listed above.
+
+Do NOT add unrelated Roblox games or unrelated products.
+
+Make the homepage visually impressive and conversion-focused while keeping the interface clean and easy to navigate.
+
+## Build with Lovable
+
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+
+## Development
+
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+```sh
+git clone <this-repository-url>
+cd <repository-name>
+npm i
 npm run dev
 ```
 
-Production build:
 
-```bash
-npm run build
-npm run start
-```
+## Standalone deployment (Vercel + Supabase)
 
-## 5. Deploy to Vercel
+1. Copy `.env.example` to `.env` for local development and fill in values. Never commit `.env`.
+2. Create a Supabase project, set `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` in Vercel.
+3. Set `DATABASE_URL` to the Supabase Postgres connection string for server-side Drizzle/database migrations.
+4. Set `PAKASIR_SLUG=pasar-setan` and a newly rotated `PAKASIR_API_KEY` in Vercel server environment variables. Do not use the key previously pasted into chat.
+5. Configure Google OAuth in Supabase Auth and add your deployed domain to Supabase Auth URL configuration / redirect URLs.
+6. Deploy using `npm ci && npm run build`.
 
-Push this repository to GitHub, then import the repository into Vercel.
-
-The repository includes:
-
-`vercel.json`
-
-with TanStack Start framework detection.
-
-Add these variables in Vercel → Project → Settings → Environment Variables:
-
-```text
-SUPABASE_URL
-SUPABASE_PUBLISHABLE_KEY
-SUPABASE_SERVICE_ROLE_KEY
-VITE_SUPABASE_URL
-VITE_SUPABASE_PUBLISHABLE_KEY
-PAKASIR_SLUG
-PAKASIR_API_KEY
-APP_URL
-```
-
-Use separate values for Production / Preview if desired.
-
-TanStack Start is supported on Vercel through Nitro. The production build is the normal `vite build` output.
-
-## 6. Pakasir webhook
-
-The existing webhook route is:
-
-`POST /api/public/webhooks/pakasir`
-
-After deployment, configure Pakasir to send webhooks to:
-
-`https://YOUR_DOMAIN/api/public/webhooks/pakasir`
-
-The server does not trust the webhook alone. It re-verifies the transaction against Pakasir before marking an order as paid.
-
-## 7. Important security rules
-
-- Never commit `.env.local` or production secrets.
-- Never expose `SUPABASE_SERVICE_ROLE_KEY` to the browser.
-- Never expose `PAKASIR_API_KEY` to the browser.
-- Only publish the Supabase publishable key through `VITE_*`.
-- Server-side order creation recalculates prices from Supabase.
-- Payment completion is verified server-side.
-- Admin access is controlled by `public.user_roles`.
-
-## 8. Repository structure
-
-```text
-src/
-  routes/                  # TanStack Start pages and API routes
-  components/              # UI/store components
-  integrations/supabase/   # Native Supabase client/auth
-  lib/                     # Commerce + payment server functions
-  assets/                  # Store assets
-
-supabase/
-  migrations/              # Database schema for the new project
-
-vercel.json                # Vercel/TanStack Start configuration
-.env.example               # Environment variable template
-```
-
-## Note about the Lovable preview badge
-
-A platform/editor badge shown inside a Lovable editor or preview is not part of the application source itself. When this repository is deployed independently to Vercel, the Lovable editor UI is not involved.
-
-This version also removes the Lovable-specific runtime integrations from the application source.
-
-## Security update — October 2026
-
-TanStack Start 1.168.32 was affected by CVE-2026-102989 (reflected XSS in server-function responses). This standalone build pins `@tanstack/react-start` to 1.168.60 and the corresponding patched TanStack Start server-core to 1.169.39. Do not deploy the old lockfile or set `DANGEROUSLY_DEPLOY_VULNERABLE_TANSTACK_START_XSS=1` as a workaround. Reinstall dependencies from the updated `package.json` before deployment.
+This archive deliberately excludes the previous `.env` file because it contained project configuration and must not be carried into a new deployment. The Supabase project is not provisioned automatically; configure your own project and apply the SQL migrations before enabling checkout.

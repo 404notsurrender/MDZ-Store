@@ -1,3 +1,1 @@
-# This value is only used by the Supabase CLI for local/linking metadata.
-# Run `supabase link --project-ref YOUR_PROJECT_REF` after creating the new project.
-project_id = "zpvzzwfowgamftuneclj"
+project_id = "YOUR_SUPABASE_PROJECT_REF"
