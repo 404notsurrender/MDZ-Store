@@ -6,6 +6,8 @@ import viteReact from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  // Also expose Vercel-Supabase integration vars (NEXT_PUBLIC_*) to the browser build.
+  envPrefix: ["VITE_", "NEXT_PUBLIC_"],
   plugins: [
     tsconfigPaths(),
     tailwindcss(),
