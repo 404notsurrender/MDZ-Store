@@ -5,8 +5,10 @@ import type { Database } from "@/integrations/supabase/types";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 function publicClient() {
-  const key = process.env['SUPABASE_PUBLISHABLE_KEY']!;
-  return createClient<Database>(process.env['SUPABASE_URL']!, key, {
+  const url = process.env['SUPABASE_URL'] ?? process.env['VITE_SUPABASE_URL'];
+  const key = process.env['SUPABASE_PUBLISHABLE_KEY'] ?? process.env['VITE_SUPABASE_PUBLISHABLE_KEY'];
+  if (!url || !key) throw new Error("Env Supabase belum diset di Vercel (SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY).");
+  return createClient<Database>(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },
     global: { fetch: (input, init) => {
       const headers = new Headers(init?.headers);
@@ -31,7 +33,7 @@ export const getStorefront = createServerFn({ method: "GET" }).handler(async () 
     c.from("categories").select("id,name,slug,description,icon,sort_order,parent_id").eq("active", true).order("sort_order"),
     c.from("products").select("*, categories(name, slug, parent_id), product_variants(id,name,price,stock,quantity_value,sort_order,active)").eq("status", "active").order("sort_order").order("popularity", { ascending: false }),
   ]);
-  if (cats.error || products.error) throw new Error("Katalog belum dapat dimuat.");
+  if (cats.error || products.error) { console.error("getStorefront", cats.error?.message, products.error?.message); throw new Error("Katalog belum dapat dimuat."); }
   return { categories: cats.data, products: products.data.map((p) => ({ ...p, product_variants: (p.product_variants ?? []).filter((v) => v.active) })) };
 });
 
