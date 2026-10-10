@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
-const input = z.object({ orderNumber: z.string().trim().regex(/^CLM-\d{8}-\d{4,}$/) });
+const input = z.object({ orderNumber: z.string().trim().regex(/^MDZ-\d{8}-\d{4,}$/) });
 
 type Ctx = { supabase: any; userId: string };
 
