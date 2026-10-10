@@ -1,5 +1,5 @@
 // Server-only Pakasir helpers. Never import from client code.
-export const PAKASIR_SLUG = process.env["PAKASIR_SLUG"] || "pasar-setan";
+export const PAKASIR_SLUG = process.env["PAKASIR_SLUG"] || "mdz-store";
 
 function apiKey() {
   const key = process.env["PAKASIR_API_KEY"];
