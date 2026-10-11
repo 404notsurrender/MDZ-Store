@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 
 const payload = z.object({
-  order_id: z.string().trim().regex(/^MDZ-\d{8}-\d{4,}$/),
+  order_id: z.string().trim().regex(/^(CLM|MDZ)-\d{8}-\d{4,}$/),
   amount: z.coerce.number().int().positive(),
   project: z.string().optional(),
   status: z.string(),
