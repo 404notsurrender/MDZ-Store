@@ -20,7 +20,7 @@ export const Route = createFileRoute("/api/public/webhooks/pakasir")({
         const parsed = payload.safeParse(body);
         if (!parsed.success) return new Response("Invalid payload", { status: 400 });
         const p = parsed.data;
-        if (p.project && p.project !== "pasar-setan") return new Response("Wrong project", { status: 400 });
+        if (p.project && p.project !== "mdz-store") return new Response("Wrong project", { status: 400 });
         if (p.status.toLowerCase() !== "completed") return new Response("ignored");
         if (p.payment_method && p.payment_method.toLowerCase() !== "qris") return new Response("Wrong method", { status: 400 });
 
