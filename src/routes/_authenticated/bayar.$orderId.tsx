@@ -10,10 +10,10 @@ import { rupiah, statusLabel } from "@/lib/store-data";
 
 export const Route = createFileRoute("/_authenticated/bayar/$orderId")({
   head: ({ params }) => ({ meta: [
-    { title: `Bayar ${params.orderId} — CherryLuvv Market` },
-    { name: "description", content: "Selesaikan pembayaran QRIS pesanan CherryLuvv Market." },
-    { property: "og:title", content: "Pembayaran QRIS CherryLuvv" },
-    { property: "og:description", content: "Scan QRIS untuk menyelesaikan pesanan item Pasar Setan." },
+    { title: `Bayar ${params.orderId} — MDZ Store` },
+    { name: "description", content: "Selesaikan pembayaran QRIS pesanan MDZ Store." },
+    { property: "og:title", content: "Pembayaran QRIS MDZ Store" },
+    { property: "og:description", content: "Scan QRIS untuk menyelesaikan pesanan item Roblox." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary" },
   ] }),
